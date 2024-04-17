@@ -37,5 +37,10 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
 
             return (SexoEnum)randomIndex;
         }
+
+        public static Guid UUID()
+        { 
+            return Guid.NewGuid();
+        }
     }
 }
