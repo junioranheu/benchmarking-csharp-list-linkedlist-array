@@ -4,16 +4,16 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Enums
 {
     public enum AcaoEnum
     {
-        [Description("foi inserido")]
+        [Description("Inserir")]
         Inserir,
 
-        [Description("foi iterado")]
+        [Description("Iterar")]
         Iterar,
 
-        [Description("foi acessado aleatoriamente")]
+        [Description("Acessar aleatoriamente")]
         AcessarAleatoriamente,
 
-        [Description("foi removido")]
+        [Description("Remover")]
         Remover
     }
 }

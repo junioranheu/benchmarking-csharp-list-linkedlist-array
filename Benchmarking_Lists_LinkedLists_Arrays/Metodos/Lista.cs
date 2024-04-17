@@ -1,48 +1,62 @@
-﻿using Benchmarking_Lists_LinkedLists_Arrays.Classes;
+﻿using System.Diagnostics;
+using Benchmarking_Lists_LinkedLists_Arrays.Classes;
 using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Helpers;
+using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
 namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
 {
     public class Lista
     {
-        public static List<Usuario> Inserir(int length, bool isExibirMensagem = false)
+        public static List<Usuario> Inserir(int length)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             List<Usuario> usuarios = new();
 
             for (int i = 0; i < length; i++)
             {
-                Usuario usuario = GerarUsuario.Gerar();
-                GerarUsuario.Mensagem(usuario, acao: AcaoEnum.Inserir, isExibir: isExibirMensagem);
-
-                usuarios.Add(usuario);
+                usuarios.Add(GerarUsuario.Gerar());
             }
+
+            stopwatch.Stop();
+            MensagemStopwatch(AcaoEnum.Inserir, stopwatch);
 
             return usuarios;
         }
 
-        public static void Iterar(List<Usuario> usuarios, bool isExibirMensagem = false)
+        public static void Iterar(List<Usuario> usuarios)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             for (int i = 0; i < usuarios.Count; i++)
             {
-                GerarUsuario.Mensagem(usuarios[i], acao: AcaoEnum.Iterar, isExibir: isExibirMensagem);
+                _ = usuarios[i].Guid;
             }
+
+            stopwatch.Stop();
+            MensagemStopwatch(AcaoEnum.Iterar, stopwatch);
         }
 
-        public static void AcessarAleatoriamente(List<Usuario> usuarios, bool isExibirMensagem = false)
+        public static void AcessarAleatoriamente(List<Usuario> usuarios)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             int random = GerarRandom.Int(0, usuarios.Count);
             Usuario usuario = usuarios[random];
 
-            GerarUsuario.Mensagem(usuario, acao: AcaoEnum.AcessarAleatoriamente, isExibir: isExibirMensagem);
+            stopwatch.Stop();
+            MensagemStopwatch(AcaoEnum.AcessarAleatoriamente, stopwatch);
         }
 
-        public static void Remover(List<Usuario> usuarios, bool isExibirMensagem = false)
+        public static void Remover(List<Usuario> usuarios)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             int random = GerarRandom.Int(0, usuarios.Count);
             usuarios.RemoveAt(random);
 
-            GerarUsuario.Mensagem(usuario: null, acao: AcaoEnum.AcessarAleatoriamente, index: random, isExibir: isExibirMensagem);
+            stopwatch.Stop();
+            MensagemStopwatch(AcaoEnum.Remover, stopwatch);
         }
     }
 }

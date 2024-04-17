@@ -1,6 +1,4 @@
 ﻿using Benchmarking_Lists_LinkedLists_Arrays.Classes;
-using Benchmarking_Lists_LinkedLists_Arrays.Enums;
-using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
 namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
 {
@@ -19,22 +17,6 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
             };
 
             return usuario;
-        }
-
-        public static void Mensagem(Usuario? usuario, AcaoEnum acao, int index = 0, bool isExibir = true)
-        {
-            if (!isExibir)
-            {
-                return;
-            }
-
-            if (usuario is null)
-            {
-                Console.WriteLine($"O usuário de index {index} {ObterDescricaoEnum(acao)}");
-                return;
-            }
-
-            Console.WriteLine($"O usuário {usuario.Nome} ({usuario.Guid}) {ObterDescricaoEnum(acao)}");
         }
     }
 }
