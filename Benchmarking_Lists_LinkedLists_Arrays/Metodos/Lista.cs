@@ -2,13 +2,14 @@
 using Benchmarking_Lists_LinkedLists_Arrays.Classes;
 using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Helpers;
-using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
 namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
 {
     public class Lista
     {
-        public static List<Usuario> Inserir(int length)
+        private static readonly TipoBenchmarkEnum TipoBenchmark = TipoBenchmarkEnum.List;
+
+        public static List<Usuario> Inserir(List<Benchmark> benchmarks, int length)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             List<Usuario> usuarios = new();
@@ -19,25 +20,25 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
             }
 
             stopwatch.Stop();
-            MensagemStopwatch(AcaoEnum.Inserir, stopwatch);
+            GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.Inserir, length, stopwatch);
 
             return usuarios;
         }
 
-        public static void Iterar(List<Usuario> usuarios)
+        public static void Iterar(List<Benchmark> benchmarks, List<Usuario> usuarios, int length)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-
+           
             for (int i = 0; i < usuarios.Count; i++)
             {
                 _ = usuarios[i].Guid;
             }
 
             stopwatch.Stop();
-            MensagemStopwatch(AcaoEnum.Iterar, stopwatch);
+            GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.Iterar, length, stopwatch);
         }
 
-        public static void AcessarAleatoriamente(List<Usuario> usuarios)
+        public static void AcessarAleatoriamente(List<Benchmark> benchmarks, List<Usuario> usuarios, int length)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -45,10 +46,10 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
             Usuario _ = usuarios[random];
 
             stopwatch.Stop();
-            MensagemStopwatch(AcaoEnum.AcessarAleatoriamente, stopwatch);
+            GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.AcessarAleatoriamente, length, stopwatch);
         }
 
-        public static void Remover(List<Usuario> usuarios)
+        public static void Remover(List<Benchmark> benchmarks, List<Usuario> usuarios, int length)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -56,7 +57,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
             usuarios.RemoveAt(random);
 
             stopwatch.Stop();
-            MensagemStopwatch(AcaoEnum.Remover, stopwatch);
+            GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.Remover, length, stopwatch);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Enums
         [Description("Iterar")]
         Iterar,
 
-        [Description("Acessar aleatoriamente")]
+        [Description("Acessar")]
         AcessarAleatoriamente,
 
         [Description("Remover")]
