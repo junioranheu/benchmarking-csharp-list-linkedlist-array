@@ -9,8 +9,8 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
             Usuario usuario = new()
             {
                 Guid = GerarRandom.UUID(),
-                Nome = GerarRandom.String(10),
-                Sobrenome = GerarRandom.String(20),
+                Nome = GerarRandom.String(20),
+                Sobrenome = GerarRandom.String(50),
                 Idade = GerarRandom.Int(1, 100),
                 Sexo = GerarRandom.Sexo(),
                 Cidade = GerarCidade.Gerar()

@@ -41,8 +41,8 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            int random = GerarRandom.Int(0, usuarios.Count);
-            Usuario usuario = usuarios[random];
+            int random = GerarRandom.Int(0, usuarios.Count - 1);
+            Usuario _ = usuarios[random];
 
             stopwatch.Stop();
             MensagemStopwatch(AcaoEnum.AcessarAleatoriamente, stopwatch);
@@ -52,7 +52,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            int random = GerarRandom.Int(0, usuarios.Count);
+            int random = GerarRandom.Int(0, usuarios.Count - 1);
             usuarios.RemoveAt(random);
 
             stopwatch.Stop();

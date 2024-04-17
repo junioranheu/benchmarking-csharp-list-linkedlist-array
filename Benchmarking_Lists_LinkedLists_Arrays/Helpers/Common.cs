@@ -15,9 +15,14 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
             return attribute!.Description;
         }
 
-        public static void MensagemInicio(BenchmarkEnum benchmark)
+        public static void MensagemInicio(BenchmarkEnum benchmark, int length)
         {
-            Console.WriteLine($"Início. [{benchmark}]");
+            Console.WriteLine($"Início. [{benchmark}] [{length} registro{(length > 1 ? "s" : string.Empty)}]");
+        }
+
+        public static void MensagemFim()
+        {
+            Console.WriteLine($"\nFim. [{Assembly.GetEntryAssembly()!.GetName().Name}]");
         }
 
         public static void MensagemStopwatch(AcaoEnum acao, Stopwatch stopwatch)

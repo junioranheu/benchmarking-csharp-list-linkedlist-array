@@ -3,15 +3,15 @@ using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Metodos;
 using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
-const int qtdInserir = 1000000;
+const int length = 5_000_000;
 
 #region List
-MensagemInicio(BenchmarkEnum.List);
-List<Usuario> lista = Lista.Inserir(qtdInserir);
+MensagemInicio(BenchmarkEnum.List, length);
+List<Usuario> lista = Lista.Inserir(length);
 Lista.Iterar(lista);
 Lista.AcessarAleatoriamente(lista);
 Lista.Remover(lista);
 #endregion
 
-Console.WriteLine($"\nFim. [{System.Reflection.Assembly.GetEntryAssembly()!.GetName().Name}]");
+MensagemFim();
 Console.ReadKey();
