@@ -29,15 +29,31 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
         public static void MensagemFim(Stopwatch stopwatch)
         {
             (double tempo, string unidade) = NormalizarElapsedMilliseconds(stopwatch.ElapsedMilliseconds);
-            Console.WriteLine($"\nFim do benchmarking [{tempo} {unidade}] [{Assembly.GetEntryAssembly()!.GetName().Name}]");
+            Console.WriteLine($"\nFim do benchmarking [{tempo} {unidade}]");
         }
 
-        public static void MensagemStopwatch(Benchmark benchmark, bool isExibirMensagemRegistros = true)
+        public static void NormalizarBenchmarks_ExibirMensagens(List<Benchmark> benchmarks)
         {
-            (double tempo, string unidade) = NormalizarElapsedMilliseconds(benchmark.Stopwatch.ElapsedMilliseconds);
-            string mensagemRegistros = isExibirMensagemRegistros ? NormalizarMensagemRegistros(benchmark.Length) : string.Empty;
+            Console.WriteLine("\nResultados:");
+            var benchmarksAgrupado = benchmarks.GroupBy(x => new { x.TipoBenchmark, x.Acao });
 
-            Console.WriteLine($"{ObterDescricaoEnum(benchmark.Acao)} {mensagemRegistros}:\n{tempo} {unidade}\n");
+            foreach (var item in benchmarksAgrupado)
+            {
+                TipoBenchmarkEnum tipoBenchmark = item.Select(x => x.TipoBenchmark).FirstOrDefault();
+                AcaoEnum acao = item.Select(x => x.Acao).FirstOrDefault();
+                List<int>? lengths = item.Select(x => x.Length).ToList();
+                List<Stopwatch>? stopwatches = item.Select(x => x.Stopwatch).ToList();
+
+                for (int i = 0; i < lengths.Count; i++)
+                {
+                    var (tempo, unidade) = NormalizarElapsedMilliseconds(stopwatches[i].ElapsedMilliseconds);
+
+                    string msg = $"[{tipoBenchmark}] [{acao}] [{lengths[i]}] [{tempo} {unidade}]";
+                    Console.WriteLine(msg);
+                }
+
+                Console.Write("\n");
+            }
         }
 
         private static (double tempo, string unidade) NormalizarElapsedMilliseconds(long ms)

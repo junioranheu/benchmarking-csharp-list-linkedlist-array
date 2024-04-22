@@ -4,7 +4,7 @@ using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Metodos;
 using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
-const bool isBenchmarkGrande = true;
+const bool isBenchmarkGrande = false;
 int[] lengths = isBenchmarkGrande ?  new[] { 5, 5_000, 500_000, 5_000_000 } : new[] { 5, 5_000 };
 
 MensagemInicio();
@@ -16,19 +16,29 @@ List<Benchmark> benchmarks = new();
 foreach (var length in lengths)
 {
     MensagemInicio(TipoBenchmarkEnum.List, length);
-    List<Usuario> lista = Lista.Inserir(benchmarks, length);
-    Lista.Iterar(benchmarks, lista, length);
-    Lista.AcessarAleatoriamente(benchmarks, lista, length);
-    Lista.Remover(benchmarks, lista, length);
+    List<Usuario> obj = Lista.Inserir(benchmarks, length);
+    Lista.Iterar(benchmarks, obj, length);
+    Lista.AcessarAleatoriamente(benchmarks, obj, length);
+    Lista.Remover(benchmarks, obj, length);
 }
 #endregion
 
-#region Benchmarks
-Console.WriteLine("\nResultados:");
-foreach (var item in benchmarks)
+#region LinkedList
+foreach (var length in lengths)
 {
-    MensagemStopwatch(item);
+    MensagemInicio(TipoBenchmarkEnum.LinkedList, length);
+    LinkedList<Usuario> obj = ListaLigada.Inserir(benchmarks, length);
+    ListaLigada.Iterar(benchmarks, obj, length);
+    ListaLigada.AcessarAleatoriamente(benchmarks, obj, length);
+    ListaLigada.Remover(benchmarks, obj, length);
 }
+#endregion
+
+#region Array
+#endregion
+
+#region Benchmarks
+NormalizarBenchmarks_ExibirMensagens(benchmarks);
 #endregion
 
 stopwatch.Stop();
