@@ -2,6 +2,7 @@
 using Benchmarking_Lists_LinkedLists_Arrays.Classes;
 using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Helpers;
+using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
 namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
 {
@@ -60,14 +61,11 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
             GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.Remover, length, stopwatch);
         }
 
-        private const string ErroIndiceForaRange = "Indíce fora do range.";
-        private const string ErroIndiceNaoEncontrado = "O item referente à esse indíce não foi encontrado na lista ligada em questão.";
-
         private static T ObterObjetoPorIndice<T>(LinkedList<T> linkedList, int index)
         {
             if (index < 0 || index >= linkedList.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), ErroIndiceForaRange);
+                throw new ArgumentOutOfRangeException(nameof(index), ObterDescricaoEnum(ErroEnum.IndiceForaRange));
             }
 
             int currentIndex = 0;
@@ -82,14 +80,14 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
                 currentIndex++;
             }
 
-            throw new InvalidOperationException(ErroIndiceNaoEncontrado);
+            throw new InvalidOperationException(ObterDescricaoEnum(ErroEnum.IndiceNaoEncontrado));
         }
 
         private static void RemoverObjetoPorIndice<T>(LinkedList<T> linkedList, int index)
         {
             if (index < 0 || index >= linkedList.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), ErroIndiceForaRange);
+                throw new ArgumentOutOfRangeException(nameof(index), ObterDescricaoEnum(ErroEnum.IndiceForaRange));
             }
 
             LinkedListNode<T> currentNode = linkedList.First!;
@@ -107,7 +105,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
                 currentIndex++;
             }
 
-            throw new InvalidOperationException(ErroIndiceNaoEncontrado);
+            throw new InvalidOperationException(ObterDescricaoEnum(ErroEnum.IndiceNaoEncontrado));
         }
     }
 }

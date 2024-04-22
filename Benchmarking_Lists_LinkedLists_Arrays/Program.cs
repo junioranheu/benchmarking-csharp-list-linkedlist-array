@@ -4,7 +4,7 @@ using Benchmarking_Lists_LinkedLists_Arrays.Enums;
 using Benchmarking_Lists_LinkedLists_Arrays.Metodos;
 using static Benchmarking_Lists_LinkedLists_Arrays.Helpers.Common;
 
-const bool isBenchmarkGrande = false;
+const bool isBenchmarkGrande = true;
 int[] lengths = isBenchmarkGrande ?  new[] { 5, 5_000, 500_000, 5_000_000 } : new[] { 5, 5_000 };
 
 MensagemInicio();
@@ -35,6 +35,14 @@ foreach (var length in lengths)
 #endregion
 
 #region Array
+foreach (var length in lengths)
+{
+    MensagemInicio(TipoBenchmarkEnum.Array, length);
+    Usuario[] obj = Matriz.Inserir(benchmarks, length);
+    Matriz.Iterar(benchmarks, obj, length);
+    Matriz.AcessarAleatoriamente(benchmarks, obj, length);
+    Matriz.Remover(benchmarks, obj, length);
+}
 #endregion
 
 #region Benchmarks
