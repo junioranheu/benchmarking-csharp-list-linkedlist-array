@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Benchmarking_Lists_LinkedLists_Arrays.Classes;
 using Benchmarking_Lists_LinkedLists_Arrays.Enums;
+using Hardware.Info;
 
 namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
 {
@@ -23,6 +24,8 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
 
         public static void MensagemInicio()
         {
+            ExibirInfosPC(ObterInformacoesPC());
+
             Console.WriteLine($"Início do benchmarking [{DateTime.Now:dd/MM/yyyy HH:mm:ss}]\n");
         }
 
@@ -80,11 +83,76 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
             return $"[{length} registro{(length > 1 ? "s" : string.Empty)}]"; 
         }
 
-        private static void LimparUltimaLinha()
+        private static Sistema ObterInformacoesPC()
         {
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, Console.CursorTop);
+            try
+            {
+                var hardwareInfo = new HardwareInfo();
+                hardwareInfo.RefreshAll();
+
+                var systemSpecs = new Sistema();
+
+                // Coletar informações do processador;
+                if (hardwareInfo.CpuList.Count > 0)
+                {
+                    var cpu = hardwareInfo.CpuList[0];
+                    systemSpecs.ProcessorName = cpu.Name;
+                    systemSpecs.NumberOfCores = cpu.NumberOfCores;
+                }
+
+                // Coletar informações de memória;
+                ulong totalMemoryBytes = 0;
+
+                foreach (var memory in hardwareInfo.MemoryList)
+                {
+                    totalMemoryBytes += memory.Capacity;
+                }
+
+                systemSpecs.TotalMemoryGB = totalMemoryBytes / (1024.0 * 1024 * 1024);
+
+                // Coletar informações das placas de vídeo;
+                foreach (var video in hardwareInfo.VideoControllerList)
+                {
+                    var graphicsCard = new Video
+                    {
+                        Name = video.Name,
+                        DriverVersion = video.DriverVersion
+                    };
+
+                    systemSpecs.GraphicsCards.Add(graphicsCard);
+                }
+
+                return systemSpecs;
+            }
+            catch (Exception)
+            {
+                return new();
+            }
+        }
+
+        private static void ExibirInfosPC(Sistema specs)
+        {
+            if (specs is null)
+            {
+                return;
+            }
+
+            Console.WriteLine("Informações do Processador:");
+            Console.WriteLine($"Nome: {specs.ProcessorName}");
+            Console.WriteLine($"Número de Núcleos: {specs.NumberOfCores}");
+            Console.WriteLine();
+
+            Console.WriteLine("Informações de Memória:");
+            Console.WriteLine($"Memória Total: {specs.TotalMemoryGB} GB");
+            Console.WriteLine();
+
+            Console.WriteLine("Informações da Placa de Vídeo:");
+            foreach (var graphicsCard in specs.GraphicsCards)
+            {
+                Console.WriteLine($"Nome: {graphicsCard.Name}");
+                Console.WriteLine($"Versão do Driver: {graphicsCard.DriverVersion}");
+                Console.WriteLine();
+            }
         }
     }
 }

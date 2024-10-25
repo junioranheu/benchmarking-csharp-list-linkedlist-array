@@ -8,10 +8,6 @@ const bool isBenchmarkGrande = false;
 int[] lengths = isBenchmarkGrande ?  new[] { 5, 5_000, 500_000, 5_000_000 } : new[] { 5, 5_000 };
 
 MensagemInicio();
-
-Console.ReadKey();
-return;
-
 Stopwatch stopwatch = Stopwatch.StartNew();
 
 List<Benchmark> benchmarks = new();

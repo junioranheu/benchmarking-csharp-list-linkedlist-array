@@ -12,6 +12,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Classes
         public required Cidade Cidade { get; set; }
     }
 
+    #region dictionary
     public class UsuarioKey_Sexo_CidadeNome
     {
         public SexoEnum Sexo { get; set; }
@@ -38,4 +39,5 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Classes
             return HashCode.Combine(Sexo, CidadeNome);
         }
     }
+    #endregion
 }
