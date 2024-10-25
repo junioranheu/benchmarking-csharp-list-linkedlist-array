@@ -26,6 +26,16 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
             Console.WriteLine($"Início do benchmarking [{DateTime.Now:dd/MM/yyyy HH:mm:ss}]\n");
         }
 
+        public static void MensagemIntermediaria(TipoBenchmarkEnum tipo, AcaoEnum acao, bool? isSkipLine = false)
+        {
+            Console.WriteLine($"A ação {tipo}/{acao} foi iniciada [{DateTime.Now:dd/MM/yyyy HH:mm:ss}]");
+
+            if (isSkipLine.GetValueOrDefault())
+            {
+                Console.WriteLine(string.Empty);
+            }
+        }
+
         public static void MensagemFim(Stopwatch stopwatch)
         {
             (double tempo, string unidade) = NormalizarElapsedMilliseconds(stopwatch.ElapsedMilliseconds);
@@ -68,6 +78,13 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
         private static string NormalizarMensagemRegistros(int length)
         {
             return $"[{length} registro{(length > 1 ? "s" : string.Empty)}]"; 
+        }
+
+        private static void LimparUltimaLinha()
+        {
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop);
         }
     }
 }

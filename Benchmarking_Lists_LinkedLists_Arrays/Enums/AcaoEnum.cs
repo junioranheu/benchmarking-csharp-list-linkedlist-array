@@ -14,6 +14,9 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Enums
         AcessarAleatoriamente,
 
         [Description("Remover")]
-        Remover
+        Remover,
+
+        [Description("Gerar dicionário")]
+        GerarDicionario
     }
 }

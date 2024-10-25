@@ -9,11 +9,16 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Metodos
 	{
         private static readonly TipoBenchmarkEnum TipoBenchmark = TipoBenchmarkEnum.Dictionary;
 
-        public static Dictionary<UsuarioKey_Sexo_CidadeNome, List<Usuario>> GerarDicionario(List<Usuario> usuarios)
+        public static Dictionary<UsuarioKey_Sexo_CidadeNome, List<Usuario>> GerarDicionario(List<Benchmark> benchmarks, List<Usuario> usuarios, int length)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             Dictionary<UsuarioKey_Sexo_CidadeNome, List<Usuario>> usuariosDictionary = usuarios.
             GroupBy(x => new UsuarioKey_Sexo_CidadeNome(x.Sexo, x.Cidade.Nome)).
             ToDictionary(x => x.Key, x => x.ToList());
+
+            stopwatch.Stop();
+            GerarBenchmark.AdicionarBenchmarkEmLista(benchmarks, TipoBenchmark, AcaoEnum.GerarDicionario, length, stopwatch);
 
             return usuariosDictionary;
         }
