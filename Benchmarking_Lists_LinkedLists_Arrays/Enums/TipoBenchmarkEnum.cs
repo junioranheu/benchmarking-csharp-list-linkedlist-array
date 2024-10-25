@@ -16,6 +16,9 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Enums
         LinkedList,
 
         [Description("Representa uma estrutura de dados de arranjo unidimensional com tamanho fixo, onde os elementos são acessados por um índice.")]
-        Array
+        Array,
+
+        [Description("Representa uma coleção de pares chave-valor, onde cada chave única está associada a um valor, permitindo acesso SUPER rápido aos dados através da chave.")]
+        Dictionary
     }
 }

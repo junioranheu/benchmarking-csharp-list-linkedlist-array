@@ -24,7 +24,7 @@ foreach (var length in lengths)
 #endregion
 
 #region LinkedList
-foreach (var length in lengths)
+foreach (var length in lengths.Where(x => x <= 5_000).ToList())
 {
     MensagemInicio(TipoBenchmarkEnum.LinkedList, length);
     LinkedList<Usuario> obj = ListaLigada.Inserir(benchmarks, length);
@@ -42,6 +42,18 @@ foreach (var length in lengths)
     Matriz.Iterar(benchmarks, obj, length);
     Matriz.AcessarAleatoriamente(benchmarks, obj, length);
     Matriz.Remover(benchmarks, obj, length);
+}
+#endregion
+
+#region Dictionary
+foreach (var length in lengths)
+{
+    MensagemInicio(TipoBenchmarkEnum.Dictionary, length);
+    List<Usuario> obj = Lista.Inserir(benchmarks, length); // Reutilizar o método de inserção de Lista;
+    Dictionary<UsuarioKey_Sexo_CidadeNome, List<Usuario>> objDicionario = Dicionario.GerarDicionario(obj);
+    Dicionario.Iterar(benchmarks, objDicionario, length);
+    Dicionario.AcessarAleatoriamente(benchmarks, objDicionario, length);
+    Dicionario.Remover(benchmarks, objDicionario, length);
 }
 #endregion
 

@@ -42,5 +42,25 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
         { 
             return Guid.NewGuid();
         }
+
+        public static string Naruto()
+        {
+            Random random = new();
+
+            string[] names = new[]
+            {
+                "Naruto", "Sasuke", "Sakura", "Kakashi", "Itachi", "Hinata", "Jiraiya",
+                "Gaara", "Shikamaru", "Tsunade", "Madara", "Obito", "Minato", "Rock Lee",
+                "Neji", "Kiba", "Choji", "Ino", "Temari", "Kankuro", "Orochimaru",
+                "Nagato", "Konan", "Zabuza", "Haku", "Deidara", "Kisame", "Tenten",
+                "Shino", "Hashirama", "Tobirama", "Sarutobi", "Danzo", "Kabuto",
+                "Karin", "Suigetsu", "Jugo", "Killer Bee", "Yamato", "Sai", "Asuma",
+                "Kurama", "Kushina", "Mei Terumi", "Raikage", "Onoki", "Shizune"
+            };
+
+            string name = names[random.Next(names.Length)];
+
+            return name;
+        }
     }
 }

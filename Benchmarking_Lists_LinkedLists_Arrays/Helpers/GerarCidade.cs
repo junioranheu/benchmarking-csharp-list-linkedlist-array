@@ -8,7 +8,7 @@ namespace Benchmarking_Lists_LinkedLists_Arrays.Helpers
         {
             Cidade cidade = new()
             {
-                Nome = GerarRandom.String(10),
+                Nome = GerarRandom.Naruto(),
                 PopulacaoEstimada = GerarRandom.Int(1, 100000),
                 IsAtivo = GerarRandom.Bool()
             };
